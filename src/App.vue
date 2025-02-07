@@ -62,15 +62,15 @@ export default {
   },
   methods: {
     async fetchData() {
-      const baseUrl = import.meta.env.VUE_BACK_URL || 'localhost';
-      const port = import.meta.env.VUE_PORT || 5000;
-      const response = await axios.get(`${baseUrl}:${port}/api/data`);
+      const baseUrl = import.meta.env.VITE_APP_BACK_URL || 'http://localhost:5000';
+      const response = await axios.get(`${baseUrl}/api/data`);
       this.rows = response.data;
     },
     async updateRow(index) {
+      const baseUrl = import.meta.env.VITE_APP_BACK_URL || 'http://localhost:5000';
       const updatedRow = this.rows[index];
       this.activeDropdown = null; // Ocultar el select después de guardar
-      await axios.post(`${baseUrl}:${port}/api/data/${index}`, { updatedRow });
+      await axios.post(`${baseUrl}/api/data/${index}`, { updatedRow });
       this.fetchData();
       alert('Datos guardados correctamente');
     },
